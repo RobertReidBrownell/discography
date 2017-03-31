@@ -1,0 +1,225 @@
+/*
+Developer: Gabriella Ramsey
+
+Table of Contents
+HEADER - Site name, logo, navigation
+DISCOGRAPHY - Track listing, discography page specific stuff
+MAINCONTENT - bio text/img
+
+Color Palette
+#cf3d3d - Flush Mahogany
+#332e2e - Mine Shaft
+#0e0c0c - Cod Grey
+#fffee0 - Half and Half
+#3d9bd6 - Shakespeare
+#7a8287 - Rolling Stone
+*/
+
+ul{
+	list-style:none;
+	padding:0;
+}
+a{
+	color:#3d9bd6;
+}
+html,body,main{
+	height:100%;
+}
+body{
+	background:#0e0c0c;
+	font-family:Overpass, sans-serif;
+}
+/* ------------ ‘Header ------------*/
+header{
+	background:#332e2e;
+	border-bottom:2px dashed #7a8287;
+	left:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:4;
+}
+	header h1{
+		color:#7a8287;
+		display:inline-block;
+		font-family:"Amatica SC",serif;
+		font-size:1.7em;
+		font-weight:700;
+		margin:0;
+		vertical-align:middle;
+	}
+	header img{
+		display:inline-block;
+		height:40px;
+		margin:7px;
+		vertical-align:middle;
+	}
+	header nav{
+		display:inline-block;
+		float:right;
+		font-family:"Amatica SC",serif;
+		font-size:1.7em;
+		font-weight:700;
+		margin:0;
+		text-align:right;
+		vertical-align:middle;
+	}
+		header li:nth-last-child(1n+2)::after{
+			content:" / ";
+			color:#7a8287;
+		}
+		header li{
+			display:inline-block;
+
+		}
+			header li a{
+				vertical-align:middle;
+			}
+
+/* ------------ ‘Discography ------------*/
+	.songList li{
+		color:#7a8287;
+		text-align:center;
+	}
+.album img{
+	display:block;
+	height:auto;
+	margin-bottom:1em;
+	margin-left:auto;
+	margin-right:auto;
+	max-width:60%;
+	width:auto;
+}
+.albumList{
+	background:#332e2e;
+	border:2px dashed #cf3d3d;
+	padding:0 .5em;
+
+	margin-bottom:1.8em;
+	margin-left:35.7%;
+	width:90%;
+}
+	.albumList ul{
+		text-align:center;
+	}
+	.albumList a{
+		color:#fffee0;
+		font-family:"Amatica SC",serif;
+		font-size:1.3em;
+	}
+	.albumList li:nth-last-of-type(1n+2){
+		border-bottom:2px dashed #cf3d3d;
+		padding-bottom:.5em;
+	}
+	/* ------------ ‘Info ------------*/
+	.infoImg{
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		max-width:100%;
+		width:100%;
+	}
+
+/* ------------ ‘Maincontent ------------*/
+body.infoPage{
+	color:#7a8287;
+	margin-left:auto;
+	margin-right:auto;
+	max-width:830px;
+}
+
+.albumTitle{
+	display:none;
+}
+main{
+	margin-top:4.3em;
+}
+h2,h3{
+	color:#7a8287;
+	font-family:"Amatica SC",sans-serif;
+	font-weight:bold;
+}
+p{
+	color:#7a8287;
+}
+
+/* ------------ ‘FORM ------------*/
+form{
+	background:#332e2e;
+	border:2px dashed #cf3d3d;
+	margin-left:auto;
+	margin-right:auto;
+	max-width:500px;
+	min-width:365px;
+	padding:16px;
+	width:50%;
+}
+	form h3{
+		border-bottom:2px dashed #cf3d3d;
+		font-size:2.5em;
+		padding-bottom:32px;
+		padding-top:16px;
+		margin:0 0 16px 0;
+		text-align:center;
+	}
+	input{
+		margin-bottom:16px;
+		width:16em;
+	}
+	input[type="radio"]{
+		display:inline;
+		margin-left:2em;
+		width:auto;
+	}
+	input[type="checkbox"]{
+		display:inline;
+		margin-top:16px;
+		width:auto;
+	}
+	input[type="submit"]{
+		background-color:#cf3d3d;
+		border:none;
+		color:#fffee0;
+		display:block;
+		font-family:"Amatica SC",serif;
+		font-size:2em;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:16px;
+		width:5em;
+	}
+	.inputspan{
+		margin-right:1em;
+	}
+	.checkinputspan{
+		text-align:center;
+	}
+/* ------------ ‘SCALE ------------*/
+@media screen and (max-width:670px) {
+	header nav{
+		display:block;
+		float:none;
+		text-align:center;
+	}
+	header ul{
+		text-align:center;
+	}
+	main{
+		margin-top:8.4em;
+	}
+	h1{
+		display:block;
+		margin:0 auto;
+		text-align:center;
+		width:100%;
+	}
+}
+@media screen and (max-width:767px) {
+
+	.albumList{
+		margin-bottom:1.8em;
+		margin-left:auto;
+		margin-right:auto;
+		width:60%;
+	}
+}
