@@ -33,8 +33,8 @@
         </header>
 
     </div><!--row 1-->
-    <main>
-      <img src="img/infopage/info.jpg" alt="" class=".infoImg" width="100%">
+    <main role="main">
+      <img src="img/infopage/info.jpg" alt="" class="infoImg">
       <h2>Jukebox The Ghost</h2>
 
       <p>
@@ -51,14 +51,14 @@
         <span class="inputspan">Address: </span> <input type="text" name="address" required><br>
         <span class="inputspan">City: </span><input type="text" name="city" required><br>
         <span class="inputspan">State: </span><input type="text" name="state" required><br>
-        <span class="inputspan">Zip: </span><input type="number" name="zipcode" maxlength="5" align="right" required id="zipcodeentry"><br> <!-- I don't think maxlength is actually working... -->
-        <span class="inputspan">Birthday: </span><input type="date" name="birthday" required placeholder="mm/dd/yyyy" id="bdayentry"><br>
+        <span class="inputspan">Zip: </span><input type="number" name="zipcode" required id="zipcodeentry"><br>
+        <span class="inputspan">Birthday: </span><input type="date" name="birthday" required id="bdayentry"><br>
         <span class="inputspan">Email: </span><input type="email" name="email" required><br>
         <span class="inputspan">Email Preference: </span><br>
           <input type="radio" checked="checked" name="emailpref"><span class="radinputspan">HTML </span><br>
           <input type="radio" name="emailpref"> <span class="radinputspan">Plain text </span><br>
-        <input type="checkbox" id="agreetoterms"> <span class="checkinputspan" required>I agree to the terms </span><br>
-		<input type="submit" name="" value="Submit">
+        <input type="checkbox" id="agreetoterms" required> <span class="checkinputspan">I agree to the terms </span><br>
+		<input type="submit" name="send" value="Submit">
       </form>
     </main>
 

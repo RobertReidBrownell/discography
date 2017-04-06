@@ -4,7 +4,9 @@ Developer: Gabriella Ramsey
 Table of Contents
 HEADER - Site name, logo, navigation
 DISCOGRAPHY - Track listing, discography page specific stuff
+INFO - Things specific to the info page
 MAINCONTENT - bio text/img
+FORM - Form on info page
 
 Color Palette
 #cf3d3d - Flush Mahogany
@@ -116,7 +118,7 @@ header{
 		display:block;
 		margin-left:auto;
 		margin-right:auto;
-		max-width:100%;
+		max-width:830px;
 		width:100%;
 	}
 
