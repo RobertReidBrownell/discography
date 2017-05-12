@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Discography</title>
+
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
+    </style>
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body class="infoPage">
+    <div class="row">
+      <?php
+      	$file =  './includes/headernav.php';
+      	if (file_exists($file) && is_readable($file)) {
+      			require $file;
+      	} else {
+      			throw new Exception("$file can't be found");
+      	}
+      ?>
+    </div><!--row 1-->
+    <main role="main">
+      <img src="img/infopage/info.jpg" alt="" class="infoImg">
+      <h2>Jukebox The Ghost</h2>
+
+      <p>
+        Jukebox the Ghost is a band that began in 2003, consisting of Ben Thornewill, Tommy Siegel, and Jesse Kristen. They love touring and have tons of shows, and they feature a piano rock style with a fair bit of experimentation.
+      </p>
+
+
+
+      <form action="info.html" method="post" onsubmit="return validateForm()">
+		<h3>Sign up for updates</h3>
+
+        <span class="inputspan">First Name: </span><input type="text" name="firstname" required><br>
+        <span class="inputspan">Last Name: </span><input type="text" name="lastname" required><br>
+        <span class="inputspan">Address: </span> <input type="text" name="address" required><br>
+        <span class="inputspan">City: </span><input type="text" name="city" required><br>
+        <span class="inputspan">State: </span><input type="text" name="state" required><br>
+        <span class="inputspan">Zip: </span><input type="number" name="zipcode" required id="zipcodeentry"><br>
+        <span class="inputspan">Birthday: </span><input type="date" name="birthday" required id="bdayentry"><br>
+        <span class="inputspan">Email: </span><input type="email" name="email" required><br>
+        <span class="inputspan">Email Preference: </span><br>
+          <input type="radio" checked="checked" name="emailpref"><span class="radinputspan">HTML </span><br>
+          <input type="radio" name="emailpref"> <span class="radinputspan">Plain text </span><br>
+        <input type="checkbox" id="agreetoterms" required> <span class="checkinputspan">I agree to the terms </span><br>
+		<input type="submit" name="send" value="Submit">
+      </form>
+    </main>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
