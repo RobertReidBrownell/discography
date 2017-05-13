@@ -51,8 +51,8 @@
         <span class="inputspan">Birthday: </span><input type="date" name="birthday" required id="bdayentry"><br>
         <span class="inputspan">Email: </span><input type="email" name="email" required><br>
         <span class="inputspan">Email Preference: </span><br>
-          <input type="radio" checked="checked" name="emailpref"><span class="radinputspan">HTML </span><br>
-          <input type="radio" name="emailpref"> <span class="radinputspan">Plain text </span><br>
+        <input type="radio" checked="checked" name="emailpref"><span class="radinputspan">HTML </span><br>
+        <input type="radio" name="emailpref"> <span class="radinputspan">Plain text </span><br>
         <input type="checkbox" id="agreetoterms" required> <span class="checkinputspan">I agree to the terms </span><br>
 		<input type="submit" name="send" value="Submit">
       </form>

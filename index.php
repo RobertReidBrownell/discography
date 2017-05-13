@@ -1,10 +1,14 @@
+<?php
+include './includes/title.php';
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Discography</title>
+    <title>Discography<?php if (isset($title)) {echo "&#8212;{$title}";} ?></title>
 
     <style>
     @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
@@ -61,7 +65,7 @@
   	            <li>Postcard</li>
   	            <li>Undeniable You</li>
   	            <li>Show Me Where It Hurts</li>
-  	          </ul><!--track list-->
+  	          </ul><!--song list-->
   	        </section>
 
   	        <section id="safeTravels" class="album">
