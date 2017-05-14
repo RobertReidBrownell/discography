@@ -1,7 +1,22 @@
 <?php
 include './includes/title.php';
-
- ?>
+require_once './includes/connection.php';
+// create the database connection
+$conn = dbConnect('read');
+$sql  = 'SELECT album.album_id, album_name, image_filename, track_name
+         FROM `album` LEFT OUTER JOIN `tracks`
+         ON album.album_id = tracks.album_id
+         WHERE album_name = ?';
+$result = $conn->query($sql);
+if (!$result) {
+    $error = $conn->error;
+}
+// initialize prepared statement
+$stmt = $conn->stmt_init();
+$stmt->prepare($sql);
+$stmt->bind_param('s', $_POST['album_name']);
+$stmt->execute();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +24,6 @@ include './includes/title.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Discography<?php if (isset($title)) {echo "&#8212;{$title}";} ?></title>
-
     <style>
     @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
     </style>
@@ -23,7 +37,6 @@ include './includes/title.php';
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body onload="return displayActive('#jukeboxTheGhost')">
-
 	  <div class="row">
       <?php
         $file =  './includes/headernav.php';
@@ -34,21 +47,36 @@ include './includes/title.php';
         }
       ?>
 	</div><!--row 1-->
-
 	<main role="main">
 	  <div class="row">
 		  <div class="col-sm-4">
-
 				<nav class="albumList">
-					<ul>
-						<li><a href="#jukeboxTheGhost" onclick="return displayActive('#jukeboxTheGhost')">Jukebox The Ghost</a></li>
+            <?php if (isset($error)) {
+                    echo "<p>$error</p>";
+            } else { ?>
+             <ul>
+                <tr>
+                    <th>Created</th>
+                    <th>Title</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+                <?php while($row = $result->fetch_assoc()) { ?>
+                <tr>
+                    <td><?= $row['date_created']; ?></td>
+                    <td><?= $row['title']; ?></td>
+                    <td><a href="blog_update_mysqli.php?article_id=<?= $row['article_id']; ?>">EDIT</a></td>
+                    <td><a href="blog_delete_mysqli.php?article_id=<?= $row['article_id']; ?>">DELETE</a></td>
+                </tr>
+                <?php } ?>
+            </ul>
+            <?php } ?>
+		<!--				<li><a href="#jukeboxTheGhost" onclick="return displayActive('#jukeboxTheGhost')">Jukebox The Ghost</a></li>
 						<li><a href="#safeTravels" onclick="return displayActive('#safeTravels')">Safe Travels</a></li>
 						<li><a href="#everythingUnderTheSun" onclick=" return displayActive('#everythingUnderTheSun')">Everything Under The Sun</a></li>
-						<li><a href="#letLiveAndLetGhost" onclick="return displayActive('#letLiveAndLetGhost')">Let Live &amp; Let Ghost</a></li>
-					</ul>
+						<li><a href="#letLiveAndLetGhost" onclick="return displayActive('#letLiveAndLetGhost')">Let Live &amp; Let Ghost</a></li> -->
 				</nav>
 			</div><!--column 1-->
-
 		<div class="col-sm-8">
   	        <section id="jukeboxTheGhost" class="album">
   	          <h2 class="albumTitle">Jukebox The Ghost</h2>
@@ -67,7 +95,6 @@ include './includes/title.php';
   	            <li>Show Me Where It Hurts</li>
   	          </ul><!--song list-->
   	        </section>
-
   	        <section id="safeTravels" class="album">
   	          <h2 class="albumTitle">Safe Travels</h2>
   	          <img src="img/albumart/safetravels.jpg" alt="">
@@ -87,7 +114,6 @@ include './includes/title.php';
   	            <li>The Spiritual</li>
   	          </ul><!--track list-->
   	        </section>
-
   	        <section id="everythingUnderTheSun" class="album">
   	          <h2 class="albumTitle">Everything Under The Sun</h2>
   	          <img src="img/albumart/everythingunderthesun.jpg" alt="">
@@ -106,7 +132,6 @@ include './includes/title.php';
   	            <li>Nobody</li>
   	          </ul><!--track list-->
   	        </section>
-
   	        <section id="letLiveAndLetGhost" class="album">
   	          <h2 class="albumTitle">Let Live &amp; Let Ghost</h2>
   	          <img src="img/albumart/letliveandletghost.jpg" alt="">
@@ -128,13 +153,10 @@ include './includes/title.php';
 		</div><!--column 2-->
 	</div><!--row 2-->
 </main>
-
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-
     <script src="js/app.js"></script>
   </body>
 </html>

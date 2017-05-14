@@ -1,5 +1,6 @@
 <?php
 include './includes/title.php';
+require_once './includes/connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
