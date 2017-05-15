@@ -96,7 +96,6 @@ header{
 	background:#332e2e;
 	border:2px dashed #cf3d3d;
 	padding:0 .5em;
-
 	margin-bottom:1.8em;
 	margin-left:35.7%;
 	width:90%;
@@ -104,15 +103,22 @@ header{
 	.albumList ul{
 		text-align:center;
 	}
-	.albumList a{
+	.albumList a {
 		color:#fffee0;
 		font-family:"Amatica SC",serif;
 		font-size:1.3em;
 	}
+	.albumList ul li {
+		color:#00ff00;
+		font-family:"Amatica SC",serif;
+		font-size:1.3em;
+	}
+
 	.albumList li:nth-last-of-type(1n+2){
 		border-bottom:2px dashed #cf3d3d;
 		padding-bottom:.5em;
-	}
+		}
+
 	/* ------------ ‘Info ------------*/
 	.infoImg{
 		display:block;
