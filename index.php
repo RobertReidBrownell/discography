@@ -3,13 +3,12 @@ include './includes/title.php';
 require_once './includes/connection.php';
 // create the database connection
 $conn = dbConnect('read');
-$testing = 3;
+$album_id = 2;
 // create sql to get track names
 $getTrackList = "SELECT album.album_id, album_name, image_filename, track_name, year_released
                  FROM album LEFT OUTER JOIN tracks
                  ON album.album_id = tracks.album_id
-                 WHERE tracks.album_id = $testing
-                 ORDER BY year_released" ;
+                 WHERE tracks.album_id = $album_id" ;
 // submit the query
 $trackList = $conn->query($getTrackList);
 if (!$trackList) {
@@ -81,7 +80,8 @@ if (!$album) {
             } else { ?>
              <ul>
                <?php do { ?>
-                 <li><a href="<?=$_SERVER['PHP_SELF'];?>?album_id=<?=$line['image_filename'];?>"><?=$line['album_name'];?></a></li>
+
+                <li><a href="<?= $_SERVER['PHP_SELF'];?>?album=<?=$line['image_filename']; ?>"><?=$line['album_name'];?></a></li>
             <?php } while ($line = $album->fetch_assoc()); ?>
              </ul>
             <?php } ?>
