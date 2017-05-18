@@ -11,9 +11,9 @@ if (preg_match('/\s/', $username)) {
   $errors[] = 'Username should not contain spaces.';
 }
 $checkPwd = new CheckPassword($password, 10);
-$checkPwd->requireMixedCase();
-$checkPwd->requireNumbers(2);
-$checkPwd->requireSymbols();
+$checkPwd->requireMixedCase(false);
+$checkPwd->requireNumbers(0);
+$checkPwd->requireSymbols(0);
 $passwordOK = $checkPwd ->check();
 if (!$passwordOK) {
     $errors = array_merge($errors, $checkPwd->getErrors());

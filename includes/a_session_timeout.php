@@ -9,7 +9,7 @@ $now = time();
 $redirect = 'http://localhost/discographyPHP/user.php';
 
 // if session variable not set, redirect to login page
-if ((!isset($_SESSION['authenticated'])) || (!$_SESSION['authenticated'] == 'Jethro') || (!$_SESSION['authenticated'] == 'Christy')) {
+if ((!isset($_SESSION['authenticated'])) || (!$_SESSION['authenticated'] == 'Christy')) {
     header("Location: $redirect");
     exit;
 } elseif ($now > $_SESSION['start'] + $timelimit) {

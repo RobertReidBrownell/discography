@@ -5,7 +5,7 @@ if (isset($_POST['register'])) {
   $password = trim($_POST['pwd']);
   $retyped = trim($_POST['conf_pwd']);
   //$userfile = '/Users/reidbrownell/private/encrypted.csv';
-  require_once '../includes/register_user_mysqli.php';
+  require_once './includes/register_user_mysqli.php';
 }
 ?>
 <!DOCTYPE HTML>
@@ -46,20 +46,21 @@ if (isset($_POST['register'])) {
 <div id="wrapper">
     <main>
         <h2 class="login">Register for a user account</h2>
-        <?php
-        if (isset($result) || isset($errors)) {
-          echo '<ul>';
-          if (!empty($errors)) {
-              foreach ($errors as $item) {
-                echo "<li>$item</li>";
-              }
-          } else {
-              echo "<li>$result</li>";
-          }
-          echo '</ul>';
-        }
-        ?>
+
         <form method="post" action="" >
+          <?php
+          if (isset($result) || isset($errors)) {
+            echo '<ul class="warning">';
+            if (!empty($errors)) {
+                foreach ($errors as $item) {
+                  echo "<li>$item</li>";
+                }
+            } else {
+                echo "<li>$result</li>";
+            }
+            echo '</ul>';
+          }
+          ?>
             <p>
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username">
@@ -73,13 +74,19 @@ if (isset($_POST['register'])) {
                 <input type="password" name="conf_pwd" id="conf_pwd">
             </p>
 
-            <p id="newsletter">
-                <input type="checkbox" name="yes" id="yes">
-                <label for="yes">Have you signed up for our newsletter?</label>
+            <p id="newsletter">Have you signed up for our newsletter?<br>
+                <input type="radio" name="signedup" id="yes">
+                <label for="yes">yes</label>
+                <input type="radio" name="signedup" id="no">
+                <label for="no">no</label>
             </p>
             <p class="optional">
                 <label for="email">Enter the email you signed up with:</label>
                 <input type="email" name="email" id="email">
+            </p>
+            <p class="optional">
+                <span id="getMoreInfo"><a href="info.php">Get our newsletter!</a></span>
+
             </p>
             <p>
                 <input type="submit" name="register" value="Register">

@@ -1,16 +1,16 @@
 <?php
-require_once '../includes/a_session_timeout.php';
+require_once '../includes/session_timeout.php';
 ?>
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Secret menu</title>
+    <title>Users Secret menu</title>
 </head>
 
 <body>
-<h1>Restricted area Admin</h1>
-<p><a href="menu_users.php">Another secret page</a></p>
+<h1>Restricted area Users</h1>
+<p><a href="menu_db.php">Another secret page</a></p>
 <?php echo $_SESSION['authenticated']; ?>
 <?php include '../includes/logout_db.php'; ?>
 </body>

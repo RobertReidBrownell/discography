@@ -6,9 +6,7 @@ if (isset($_POST['login'])) {
     session_start();
     $username = trim($_POST['username']);
     $password = trim($_POST['pwd']);
-    // location to redirect on success
-    $redirect = 'http://localhost/discographyPHP/menu_db.php';
-  //  $redirect = 'http://localhost/phpsols/authenticate/menu_db.php';
+    // $redirect = 'http://localhost/phpsols/authenticate/menu_db.php';
     require_once './includes/authenticate_mysqli.php';
 }
 ?>
@@ -46,13 +44,14 @@ if (isset($_POST['login'])) {
   <main role="main">
   <div class="row">
     <h2 class="login">Login</h2>
-  <?php if ($error) {
-      echo "<p>$error</p>";
-  } elseif (isset($_GET['expired'])) {
-      ?>
-      <p>Your session has expired. Please log in again.</p>
-  <?php } ?>
+
   <form method="post" action="">
+    <?php if ($error) {
+        echo "<p class=\"warning\">$error</p>";
+    } elseif (isset($_GET['expired'])) {
+        ?>
+        <p class="warning">Your session has expired. Please log in again.</p>
+    <?php } ?>
       <p>
           <label for="username">Username:</label>
           <input type="text" name="username" id="username">
@@ -65,7 +64,6 @@ if (isset($_POST['login'])) {
           <input name="login" type="submit" id="login" value="Log in">
           <a href="newuser.php" class="registration">Register new account</a>
       </p>
-
   </form>
 </div><!-- row 2-->
 </main>

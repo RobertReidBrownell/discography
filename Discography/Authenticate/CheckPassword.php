@@ -1,5 +1,5 @@
 <?php
-namespace PhpSolutions\Authenticate;
+namespace Discography\Authenticate;
 
 class CheckPassword {
 
