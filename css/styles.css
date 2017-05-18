@@ -31,7 +31,7 @@ body{
 	background:#0e0c0c;
 	font-family:Overpass, sans-serif;
 }
-/* ------------ ‘Header ------------*/
+/* ------------ â€˜Header ------------*/
 header{
 	background:#332e2e;
 	border-bottom:2px dashed #7a8287;
@@ -78,7 +78,7 @@ header{
 				vertical-align:middle;
 			}
 
-/* ------------ ‘Discography ------------*/
+/* ------------ â€˜Discography ------------*/
 	.songList li{
 		color:#7a8287;
 		text-align:center;
@@ -91,11 +91,12 @@ header{
 	margin-right:auto;
 	max-width:60%;
 	width:auto;
-} 
+}
 .albumList{
 	background:#332e2e;
 	border:2px dashed #cf3d3d;
 	padding:0 .5em;
+
 	margin-bottom:1.8em;
 	margin-left:35.7%;
 	width:90%;
@@ -103,23 +104,16 @@ header{
 	.albumList ul{
 		text-align:center;
 	}
-	.albumList a {
+	.albumList a{
 		color:#fffee0;
 		font-family:"Amatica SC",serif;
 		font-size:1.3em;
 	}
-	.albumList ul li {
-		color:#00ff00;
-		font-family:"Amatica SC",serif;
-		font-size:1.3em;
-	}
-
 	.albumList li:nth-last-of-type(1n+2){
 		border-bottom:2px dashed #cf3d3d;
 		padding-bottom:.5em;
-		}
-
-	/* ------------ ‘Info ------------*/
+	}
+	/* ------------ â€˜Info ------------*/
 	.infoImg{
 		display:block;
 		margin-left:auto;
@@ -128,7 +122,7 @@ header{
 		width:100%;
 	}
 
-/* ------------ ‘Maincontent ------------*/
+/* ------------ â€˜Maincontent ------------*/
 body.infoPage{
 	color:#7a8287;
 	margin-left:auto;
@@ -151,7 +145,7 @@ p{
 	color:#7a8287;
 }
 
-/* ------------ ‘FORM ------------*/
+/* ------------ â€˜FORM ------------*/
 form{
 	background:#332e2e;
 	border:2px dashed #cf3d3d;
@@ -202,7 +196,13 @@ form{
 	.checkinputspan{
 		text-align:center;
 	}
-/* ------------ ‘SCALE ------------*/
+	/* ---Newsletter (added for redesign)---  */
+	.warning {
+		color:#f00;
+		font-weight:bold;
+		font-size: 1.1em;
+	}
+/* ------------ â€˜SCALE ------------*/
 @media screen and (max-width:670px) {
 	header nav{
 		display:block;

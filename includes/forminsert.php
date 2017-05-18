@@ -36,41 +36,19 @@ if(!$suspect) {
 }
 // validate the user's email
 if (!$suspect && !empty($email)) {
-  $validemail = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $validemail = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    if (!$validemail) {
+        $errors['email'] = true;
+      }
+
   if ($validemail) {
-    $headers .= "\r\nReply-To: $validemail";
-  } else {
-      $errors['email'] = true;
-  }
-}
-// flag initialized
-$mailSent = false;
-// Go ahead only if not suspect, all required fields OK, and no errors
-if (!$suspect && !$missing && !$errors) {
-  //initialize the $message variable
-   $message = '';
-   // loop through the $expected Array
-   foreach ($expected as $item) {
-     //assign the value fo the current item to $val
-     if (isset(${$item}) && !empty(${$item})) {
-       $val = ${$item};
-     } else {
-       // if it has no value, assign 'Not Selected'
-       $val = 'Not selected';
-     }
-     // if an array, expand as comma-separated string
-     if (is_array($val)) {
-       $val = implode(', ', $val);
-     }
-     // replace underscores and hyphens in the label with spaces
-     $item = str_replace(['_', '-'], ' ', $item);
-     // add label and value to the message body
-     $message .= ucfirst($item).": $val\r\n\r\n";
-   }
-   // limit line length to 70 characters
-   $message = wordwrap($message, 70);
-   $mailSent = mail($to, $subject, $message, $headers);
-    if (!$mailSent) {
-      $errors['mailfail'] = true;
+            $dup = $_POST['email'];
+            $query = $conn->prepare("SELECT * FROM userdata WHERE email = '$dup' ");
+            $query->execute();
+            $query->store_result();
+            $rowinfo = $query->num_rows;
+          }
+          if ($rowinfo > 0 ) {
+              $errors['duplicate'] = true;
+          }
     }
-}

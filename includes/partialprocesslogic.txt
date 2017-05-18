@@ -1,0 +1,22 @@
+if (isset($_POST['send'])) {
+    // email processing script
+    $to = 'reidbrownellhub@gmail.com';
+    $subject = 'Discography';
+    // list expected fields
+    $expected = ['firstname','lastname', 'email', 'address', 'city', 'state', 'zipcode', 'birthday', 'agreetoterms'];
+    $required = ['firstname','lastname', 'email', 'address', 'city', 'state', 'zipcode', 'birthday', 'agreetoterms'];
+    // set default values for variables that might not exist
+    if (count($_POST['agreetoterms']) < 1) {
+        $errors['agreetoterms'] = true;
+    }
+
+    // create additional headers
+    $headers = "From: Discography Site<feedback@example.com>\r\n";
+    $headers .= 'Content-Type: text/plain; charset=utf-8';
+    require './includes/processmail.php';
+    if ($mailSent) {
+      //  header('Location: http://www.rrbconcepts.com/discographyPHP/thank_you.php');
+        header('Location: http://localhost/discographyPHP/thank_you.php');
+        exit;
+    }
+}

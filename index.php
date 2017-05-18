@@ -4,7 +4,7 @@ require_once './includes/connection.php';
 // create the database connection
 $conn = dbConnect('read');
 //create sql for album name and image
-$sql = "SELECT image_filename, album_name FROM album ";
+$sql = "SELECT image_filename, album_name FROM album ORDER BY year_released DESC";
 // submit the query
 $album = $conn->query($sql);
 if (!$album) {
@@ -20,13 +20,13 @@ if (!$album) {
     }
 
     $caption = $line['album_name'];
-    $album_id = $mainImage;
+    $activeAlbum = $mainImage;
   }
 // create sql query to get track names
 $getTrackList = "SELECT album.album_id, album_name, image_filename, track_name, year_released
                  FROM album LEFT OUTER JOIN tracks
                  ON album.album_id = tracks.album_id
-                 WHERE image_filename = '$album_id'";
+                 WHERE image_filename = '$activeAlbum'";
 // submit the query
 $trackList = $conn->query($getTrackList);
 if (!$trackList) {
@@ -74,7 +74,6 @@ if (!$trackList) {
             } else { ?>
              <ul>
                <?php do { ?>
-
                 <li><a href="<?= $_SERVER['PHP_SELF'];?>?image=<?=$line['image_filename']; ?>"><?= $line['album_name'] ?></a></li>
             <?php } while ($line = $album->fetch_assoc()); ?>
              </ul>
@@ -88,7 +87,6 @@ if (!$trackList) {
            <?php do { ?>
                     <li><?= $row['track_name']; ?></li>
           <?php } while ($row = $trackList->fetch_assoc());  ?>
-
           </ul><!--song list-->
       </figure>
   	    </div><!--column 2-->
@@ -96,8 +94,8 @@ if (!$trackList) {
 </main>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed
+    <!-- Include all compiled plugins (below), or include individual files as needed-->
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/app.js"></script>-->
+    <script src="js/app.js"></script>
   </body>
 </html>
