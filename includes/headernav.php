@@ -7,6 +7,7 @@
       <li><a href="index.php">Discography</a></li>
           <li><a href="info.php">Info</a></li>
           <li><a href="cite.php">Cite</a></li>
+          <li><a href="user.php">Login</a></li>
         </ul>
       </nav>
   </header>

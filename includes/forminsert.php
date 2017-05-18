@@ -40,15 +40,29 @@ if (!$suspect && !empty($email)) {
     if (!$validemail) {
         $errors['email'] = true;
       }
-
-  if ($validemail) {
-            $dup = $_POST['email'];
-            $query = $conn->prepare("SELECT * FROM userdata WHERE email = '$dup' ");
+    if ($validemail) {
+            $query = $conn->prepare("SELECT * FROM userdata WHERE email = '$validemail' ");
             $query->execute();
             $query->store_result();
             $rowinfo = $query->num_rows;
           }
           if ($rowinfo > 0 ) {
               $errors['duplicate'] = true;
-          }
-    }
+          } else  {
+              // flag initialized
+              $mailSent = false;
+              // Go ahead only if not suspect, all required fields OK, and no errors
+              if (!$suspect && !$missing && !$errors) {
+                 $headers = "From: Jukebox the Ghost<newsletter@discography.com>\r\n";
+                 $headers .= 'Content-Type: text/plain; charset=utf-8';
+                 $to = $validemail;
+                 //create the $message variable
+                 $message = "Thank you for signing up for our newsletter.\r\n We hope that we can bring you even a small fraction of the happiness you have brought us.\r\n";
+                 $subject = 'Jukebox the Ghost - Newsletter';
+                 // limit line length to 70 characters
+                 $mailSent = mail($to, $subject, $message, $headers);
+                  if (!$mailSent) {
+                    $errors['mailfail'] = true;}
+                  }
+              }
+}

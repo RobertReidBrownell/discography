@@ -1,7 +1,7 @@
 <?php
-use PhpSolutions\Authenticate\CheckPassword;
+use Discography\Authenticate\CheckPassword;
 
-require_once __DIR__ . '/../PhpSolutions/Authenticate/CheckPassword.php';
+require_once __DIR__ . '/../Discography/Authenticate/CheckPassword.php';
 $usernameMinChars = 6;
 $errors = [];
 if (strlen($username) < $usernameMinChars) {

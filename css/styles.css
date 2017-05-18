@@ -202,6 +202,18 @@ form{
 		font-weight:bold;
 		font-size: 1.1em;
 	}
+	/*--Login pages (added for redesign) --- */
+	h2.login{
+		text-align: center;
+	}
+	.optional {
+		display: none;
+	}
+	.registration {
+		margin: 10px auto;
+		display:block;
+		text-align: center;
+		}
 /* ------------ â€˜SCALE ------------*/
 @media screen and (max-width:670px) {
 	header nav{

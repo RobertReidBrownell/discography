@@ -55,6 +55,7 @@ if (!$trackList) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
   </head>
+  <body>
     <div class="row">
       <?php
         $file =  './includes/headernav.php';

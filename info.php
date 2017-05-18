@@ -20,21 +20,13 @@ if (isset($_POST['send'])) {
         $_POST['agreetoterms'] = '';
         $errors['agreetoterms'] = true;
     }
-
-
-
-
-
-
-
     require './includes/forminsert.php';
-    if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['email']) && !empty($_POST['address']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['zcode']) &&
-    !empty($_POST['bday']) && !empty($_POST['agreetoterms']) && !empty($_POST['epref'])) {
-
+    if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['email']) && !empty($_POST['address']) && !empty($_POST['city']) &&
+        !empty($_POST['state']) && !empty($_POST['zcode']) && !empty($_POST['bday']) && !empty($_POST['agreetoterms']) && !empty($_POST['epref'])) {
         // initialize prepared statement
         $stmt = $conn->stmt_init();
         // create SQL
-        $sql = 'INSERT IGNORE INTO userdata (first_name, last_name, address, city, state, zip_code, birthday, email, email_preference)
+        $sql = 'INSERT INTO userdata (first_name, last_name, address, city, state, zip_code, birthday, email, email_preference)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
         if ($stmt->prepare($sql)) {
             // bind parameters and execute statement
@@ -44,7 +36,6 @@ if (isset($_POST['send'])) {
               $OK = true;
             }
         }
-
         //redirect if successful or display error
         if ($OK) {
           //  header('Location: http://www.rrbconcepts.com/discographyPHP/thank_you.php');
@@ -92,17 +83,14 @@ if (isset($_POST['send'])) {
     <main role="main">
       <img src="img/infopage/info.jpg" alt="An image of the band Jukebox the ghost wakling across the street" class="infoImg">
       <h2>Jukebox The Ghost</h2>
-
       <p>
         Jukebox the Ghost is a band that began in 2003, consisting of Ben Thornewill, Tommy Siegel, and Jesse Kristen. They love touring and have tons of shows, and they feature a piano rock style with a fair bit of experimentation.
       </p>
       <?php  if ($missing || $errors) { ?>
           <p class="warning">Please fix the item(s) indicated.</p>
+      <?php } elseif (($_POST && $suspect) || ($_POST && isset($errors['mailfail']))) { ?>
+          <p class="warning">We are sorry. Your response email has failed.</p>
       <?php } ?>
-      <?php if (isset($errors['duplicate']))  { ?>
-               <p class="warning">You are already signed up for our newsletter.</p>
-    <?php  } ?>
-
       <form action="" method="post" >
 		<h3>Sign up for updates</h3>
         <?php if ($missing && in_array('fname', $missing)) { ?>
@@ -164,9 +152,11 @@ if (isset($_POST['send'])) {
         <?php if ($missing && in_array('email', $missing)) { ?>
                 <span class="warning">Please enter your email address</span><br>
         <?php } elseif (isset($errors['email'])) { ?>
-            <span class="warning">Invalid email address</span><br>
-        <?php }?>
-        <span class="inputspan">Email: </span><input type="email" name="email" id="email"
+                <span class="warning">Invalid email address</span><br>
+        <?php }  elseif (isset($errors['duplicate'])) { ?>
+                 <span class="warning">This email is already signed up for our newsletter.</span><br>
+        <?php } ?>
+        <span class="inputspan">Email: </span><input type="text" name="email" id="email"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($email) . '"';
         } ?>><br>
@@ -186,17 +176,13 @@ if (isset($_POST['send'])) {
             echo 'checked';
         } ?>>
          <span class="radinputspan">Plain text</span><br>
-
          <?php if (isset($errors['agreetoterms'])) { ?>
              <span class="warning">Please agree to the terms and conditions</span><br>
          <?php } ?>
         <input type="checkbox" name="agreetoterms" id="agreetoterms"> <span class="checkinputspan">I agree to the terms </span>
-
-
         <input type="submit" name="send" value="Submit">
       </form>
     </main>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

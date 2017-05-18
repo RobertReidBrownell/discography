@@ -45,9 +45,6 @@ if (isset($_POST['register'])) {
 </header>
 <div id="wrapper">
     <main>
-        <h2>Thank You</h2>
-        <p>You have signed up for our newsletter. We appreciate your support, and wouldn't be where we are today without fans like you.</p>
-        <p>We hope you'll continue to enjoy our website and hope see you again.</p>
         <h2 class="login">Register for a user account</h2>
         <?php
         if (isset($result) || isset($errors)) {
@@ -75,6 +72,15 @@ if (isset($_POST['register'])) {
                 <label for="conf_pwd">Retype Password:</label>
                 <input type="password" name="conf_pwd" id="conf_pwd">
             </p>
+
+            <p id="newsletter">
+                <input type="checkbox" name="yes" id="yes">
+                <label for="yes">Have you signed up for our newsletter?</label>
+            </p>
+            <p class="optional">
+                <label for="email">Enter the email you signed up with:</label>
+                <input type="email" name="email" id="email">
+            </p>
             <p>
                 <input type="submit" name="register" value="Register">
             </p>
@@ -82,5 +88,6 @@ if (isset($_POST['register'])) {
     </main>
 
 </div>
+<script src="js/toggle_fields.js"></script>
 </body>
 </html>
