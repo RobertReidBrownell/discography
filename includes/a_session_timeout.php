@@ -6,12 +6,17 @@ $timelimit = 15 * 60; // 15 minutes
 // get the current time
 $now = time();
 // where to redirect if rejected
-$redirect = 'http://localhost/discographyPHP/user.php';
+$redirect = 'http://localhost/discographyPHP/login.php';
 
 // if session variable not set, redirect to login page
-if ((!isset($_SESSION['authenticated'])) || (!$_SESSION['authenticated'] == 'Christy')) {
+if ((!isset($_SESSION['authenticated']))) {
     header("Location: $redirect");
     exit;
+     // if not authenticated as the Admin user redirect to login page
+  } elseif (($_SESSION['authenticated']) !== 'Christy') {
+    header("Location: $redirect");
+    exit;
+
 } elseif ($now > $_SESSION['start'] + $timelimit) {
     // if timelimit has expired, destroy session and redirect
     $_SESSION = [];
@@ -26,4 +31,5 @@ if ((!isset($_SESSION['authenticated'])) || (!$_SESSION['authenticated'] == 'Chr
 } else {
     // if it's got this far, it's OK, so update start time
     $_SESSION['start'] = time();
+    $file = $_SERVER['DOCUMENT_ROOT']."/discographyPHP/includes/headernavadmin.php";
 }

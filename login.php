@@ -2,12 +2,27 @@
 include './includes/title.php';
 require_once './includes/connection.php';
 $error = '';
+require_once './includes/non_session.php';
 if (isset($_POST['login'])) {
     session_start();
     $username = trim($_POST['username']);
     $password = trim($_POST['pwd']);
     // $redirect = 'http://localhost/phpsols/authenticate/menu_db.php';
     require_once './includes/authenticate_mysqli.php';
+}
+// run this script only if the logout button has been clicked
+if (isset($_POST['logout'])) {
+    // empty the $_SESSION array
+    $_SESSION = [];
+    // invalidate the session cookie
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time()-86400, '/');
+    }
+    // end session and redirect
+    session_destroy();
+     //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
+      header('Location: http://localhost/discographyPHP/login.php');
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -33,7 +48,6 @@ if (isset($_POST['login'])) {
   <body class="infoPage">
     <div class="row">
       <?php
-        $file =  './includes/headernav.php';
         if (file_exists($file) && is_readable($file)) {
             require $file;
         } else {
@@ -45,7 +59,7 @@ if (isset($_POST['login'])) {
   <div class="row">
     <h2 class="login">Login</h2>
 
-  <form method="post" action="">
+  <form class="inputForm" method="post" action="">
     <?php if ($error) {
         echo "<p class=\"warning\">$error</p>";
     } elseif (isset($_GET['expired'])) {
@@ -61,7 +75,7 @@ if (isset($_POST['login'])) {
           <input type="password" name="pwd" id="pwd">
       </p>
       <p>
-          <input name="login" type="submit" id="login" value="Log in">
+          <input class="formSubmit" name="login" type="submit" id="login" value="Log in">
           <a href="newuser.php" class="registration">Register new account</a>
       </p>
   </form>

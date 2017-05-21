@@ -1,6 +1,8 @@
 <?php
 include './includes/title.php';
 require_once './includes/connection.php';
+require_once './includes/non_session.php';
+
 // create the database connection
 $conn = dbConnect('read');
 //create sql for album name and image
@@ -18,7 +20,6 @@ if (!$album) {
     } else {
         $mainImage = $line['image_filename'];
     }
-
     $caption = $line['album_name'];
     $activeAlbum = $mainImage;
   }
@@ -34,6 +35,21 @@ if (!$trackList) {
 } else {
 // extract the first row as an array
     $row = $trackList->fetch_assoc();
+}
+// run this script only if the logout button has been clicked
+if (isset($_POST['logout'])) {
+    // empty the $_SESSION array
+    $_SESSION = [];
+    // invalidate the session cookie
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time()-86400, '/');
+    }
+    // end session and redirect
+    session_destroy();
+
+    //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
+      header('Location: http://localhost/discographyPHP/login.php');
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -58,7 +74,6 @@ if (!$trackList) {
   <body>
     <div class="row">
       <?php
-        $file =  './includes/headernav.php';
         if (file_exists($file) && is_readable($file)) {
             require $file;
         } else {

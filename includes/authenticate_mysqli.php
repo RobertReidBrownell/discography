@@ -3,9 +3,9 @@ require_once 'connection.php';
 $conn = dbConnect('read');
 $errors = [];
 // location to redirect on success for admin
-$redirect = 'http://localhost/discographyPHP/authenticated/menu_db.php';
+$redirect = 'http://localhost/discographyPHP/index.php';
 // location to redirect on success for users
-$redirected = 'http://localhost/discographyPHP/authenticated/menu_users.php';
+$redirected = 'http://localhost/discographyPHP/index.php';
 // get the username's encrypted password from the database
 $sql = 'SELECT pwd, user_level FROM users WHERE username = ?';
 // initialize and prepare statement

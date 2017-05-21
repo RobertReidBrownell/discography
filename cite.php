@@ -1,6 +1,7 @@
 <?php
 include './includes/title.php';
 require_once './includes/connection.php';
+require_once './includes/non_session.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +26,6 @@ require_once './includes/connection.php';
   <body class="infoPage">
     <div class="row">
       <?php
-        $file =  './includes/headernav.php';
         if (file_exists($file) && is_readable($file)) {
             require $file;
         } else {

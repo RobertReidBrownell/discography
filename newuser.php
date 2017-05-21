@@ -6,6 +6,7 @@ if (isset($_POST['register'])) {
   $retyped = trim($_POST['conf_pwd']);
   //$userfile = '/Users/reidbrownell/private/encrypted.csv';
   require_once './includes/register_user_mysqli.php';
+  require_once '../includes/non_session.php';
 }
 ?>
 <!DOCTYPE HTML>
@@ -33,7 +34,6 @@ if (isset($_POST['register'])) {
 <header>
   <div class="row">
   <?php
-    $file =  './includes/headernav.php';
     if (file_exists($file) && is_readable($file)) {
         require $file;
     } else {

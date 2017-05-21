@@ -28,9 +28,7 @@ if (isset($_POST['register'])) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-
-<body>
-<header>
+<body class="infoPage">
   <div class="row">
   <?php
     $file =  './includes/headernav.php';
@@ -40,47 +38,14 @@ if (isset($_POST['register'])) {
         throw new Exception("$file can't be found");
     }
   ?>
-</div><!--row 1--></header>
-    <h1>Japan Journey </h1>
-</header>
+</div><!--row 1-->
 <div id="wrapper">
     <main>
-        <h2>Thank You</h2>
+      <h2 class="thankYou">Thank You</h2>
+      <form class="inputForm">
         <p>You have signed up for our newsletter. We appreciate your support, and wouldn't be where we are today without fans like you.</p>
-        <p>We hope you'll continue to enjoy our website and hope see you again.</p>
-        <h2 class="login">Register for a user account</h2>
-        <?php
-        if (isset($result) || isset($errors)) {
-          echo '<ul>';
-          if (!empty($errors)) {
-              foreach ($errors as $item) {
-                echo "<li>$item</li>";
-              }
-          } else {
-              echo "<li>$result</li>";
-          }
-          echo '</ul>';
-        }
-        ?>
-        <form method="post" action="" >
-            <p>
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username">
-            </p>
-            <p>
-                <label for="pwd">Password:</label>
-                <input type="password" name="pwd" id="pwd">
-            </p>
-            <p>
-                <label for="conf_pwd">Retype Password:</label>
-                <input type="password" name="conf_pwd" id="conf_pwd">
-            </p>
-            <p>
-                <input type="submit" name="register" value="Register">
-            </p>
+        <p>We hope you'll continue to enjoy our website and hope to see you again.</p>
         </form>
-    </main>
-
 </div>
 </body>
 </html>

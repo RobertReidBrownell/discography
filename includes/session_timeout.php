@@ -6,10 +6,10 @@ $timelimit = 15 * 60; // 15 minutes
 // get the current time
 $now = time();
 // where to redirect if rejected
-$redirect = 'http://localhost/discographyPHP/user.php';
+$redirect = 'http://localhost/discographyPHP/login.php';
 
 // if session variable not set, redirect to login page
-if ((!isset($_SESSION['authenticated'])) || (!$_SESSION['authenticated'] == 'Jethro') || (!$_SESSION['authenticated'] == 'Christy')) {
+if (!isset($_SESSION['authenticated']))  {
     header("Location: $redirect");
     exit;
 } elseif ($now > $_SESSION['start'] + $timelimit) {

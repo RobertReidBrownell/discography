@@ -11,7 +11,7 @@ if (isset($_POST['logout'])) {
     session_destroy();
 
     //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
-      header('Location: http://localhost/discographyPHP/user.php');
+      header('Location: http://localhost/discographyPHP/login.php');
     exit;
 }
 ?>

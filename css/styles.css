@@ -21,8 +21,10 @@ ul{
 	list-style:none;
 	padding:0;
 }
-a{
+a, .logout{
 	color:#3d9bd6;
+	background:none;
+  border:none;
 }
 html,body,main{
 	height:100%;
@@ -74,7 +76,7 @@ header{
 			display:inline-block;
 
 		}
-			header li a{
+			header li a, header li.logout{
 				vertical-align:middle;
 			}
 
@@ -96,7 +98,6 @@ header{
 	background:#332e2e;
 	border:2px dashed #cf3d3d;
 	padding:0 .5em;
-
 	margin-bottom:1.8em;
 	margin-left:35.7%;
 	width:90%;
@@ -146,7 +147,7 @@ p{
 }
 
 /* ------------ â€˜FORM ------------*/
-form{
+form.inputForm{
 	background:#332e2e;
 	border:2px dashed #cf3d3d;
 	margin-left:auto;
@@ -164,7 +165,7 @@ form{
 		margin:0 0 16px 0;
 		text-align:center;
 	}
-	input{
+	input.formInput{
 		margin-bottom:16px;
 		width:16em;
 	}
@@ -178,12 +179,16 @@ form{
 		margin-top:16px;
 		width:auto;
 	}
-	input[type="submit"]{
+	input[type="submit"].formSubmit,
+	input[type="button"]{
 		background-color:#cf3d3d;
 		border:none;
 		color:#fffee0;
 		display:block;
 		font-family:"Amatica SC",serif;
+
+	}
+	input[type="submit"].formSubmit{
 		font-size:2em;
 		margin-left:auto;
 		margin-right:auto;
@@ -196,6 +201,12 @@ form{
 	.checkinputspan{
 		text-align:center;
 	}
+	.trackInput {
+		width: 90%;
+	}
+	.trackSubmit {
+		margin-bottom: 30px;
+	}
 	/* ---Newsletter (added for redesign)---  */
 	.warning {
 		color:#f00;
@@ -203,7 +214,8 @@ form{
 		font-size: 1.1em;
 	}
 	/*--Login pages (added for redesign) --- */
-	h2.login{
+	h2.login,
+	h2.thankYou{
 		text-align: center;
 	}
 	.optional {
@@ -213,6 +225,11 @@ form{
 		margin: 10px auto;
 		display:block;
 		text-align: center;
+		}
+
+		.logout:hover {
+			text-decoration: underline;
+			filter: brightness(60%);
 		}
 /* ------------ â€˜SCALE ------------*/
 @media screen and (max-width:670px) {

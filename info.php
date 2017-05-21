@@ -1,6 +1,7 @@
 <?php
 include './includes/title.php';
 require_once './includes/connection.php';
+require_once './includes/non_session.php';
 // initating $errors and $missing as arrays so they can store multiple values
 $errors = [];
 $missing = [];
@@ -48,6 +49,21 @@ if (isset($_POST['send'])) {
           $error;
   }
 }
+// run this script only if the logout button has been clicked
+if (isset($_POST['logout'])) {
+    // empty the $_SESSION array
+    $_SESSION = [];
+    // invalidate the session cookie
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time()-86400, '/');
+    }
+    // end session and redirect
+    session_destroy();
+
+    //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
+      header('Location: http://localhost/discographyPHP/login.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +88,6 @@ if (isset($_POST['send'])) {
   <body class="infoPage">
     <div class="row">
       <?php
-      	$file =  './includes/headernav.php';
       	if (file_exists($file) && is_readable($file)) {
       			require $file;
       	} else {
@@ -86,17 +101,17 @@ if (isset($_POST['send'])) {
       <p>
         Jukebox the Ghost is a band that began in 2003, consisting of Ben Thornewill, Tommy Siegel, and Jesse Kristen. They love touring and have tons of shows, and they feature a piano rock style with a fair bit of experimentation.
       </p>
-      <?php  if ($missing || $errors) { ?>
-          <p class="warning">Please fix the item(s) indicated.</p>
-      <?php } elseif (($_POST && $suspect) || ($_POST && isset($errors['mailfail']))) { ?>
-          <p class="warning">We are sorry. Your response email has failed.</p>
-      <?php } ?>
-      <form action="" method="post" >
+      <form class="inputForm" action="" method="post" >
+        <?php  if ($missing || $errors) { ?>
+            <p class="warning">Please fix the item(s) indicated.</p>
+        <?php } elseif (($_POST && $suspect) || ($_POST && isset($errors['mailfail']))) { ?>
+            <p class="warning">We are sorry. Your response email has failed.</p>
+        <?php } ?>
 		<h3>Sign up for updates</h3>
         <?php if ($missing && in_array('fname', $missing)) { ?>
                   <span class="warning">Please enter your first name</span><br>
         <?php } ?>
-        <span class="inputspan">First Name: </span><input type="text" name="fname" id="fname"
+        <span class="inputspan">First Name: </span><input class="formInput" type="text" name="fname" id="fname"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($fname) . '"';
         } ?>><br>
@@ -104,7 +119,7 @@ if (isset($_POST['send'])) {
         <?php if ($missing && in_array('lname', $missing)) { ?>
                   <span class="warning">Please enter your last name</span><br>
         <?php } ?>
-        <span class="inputspan">Last Name: </span><input type="text" name="lname" id="lname"
+        <span class="inputspan">Last Name: </span><input class="formInput" type="text" name="lname" id="lname"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($lname) . '"';
         } ?>><br>
@@ -112,7 +127,7 @@ if (isset($_POST['send'])) {
         <?php if ($missing && in_array('address', $missing)) { ?>
                   <span class="warning">Please enter your address</span><br>
         <?php } ?>
-        <span class="inputspan">Address: </span> <input type="text" name="address" id="address"
+        <span class="inputspan">Address: </span> <input class="formInput" type="text" name="address" id="address"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($address) . '"';
         } ?>><br>
@@ -120,7 +135,7 @@ if (isset($_POST['send'])) {
         <?php if ($missing && in_array('city', $missing)) { ?>
                   <span class="warning">Please enter your city</span><br>
         <?php } ?>
-        <span class="inputspan">City: </span><input type="text" name="city" id="city"
+        <span class="inputspan">City: </span><input class="formInput" type="text" name="city" id="city"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($city) . '"';
         } ?>><br>
@@ -128,7 +143,7 @@ if (isset($_POST['send'])) {
         <?php if ($missing && in_array('state', $missing)) { ?>
                   <span class="warning">Please enter your state</span><br>
         <?php } ?>
-        <span class="inputspan">State: </span><input type="text" name="state" id="state"
+        <span class="inputspan">State: </span><input class="formInput" type="text" name="state" id="state"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($state) . '"';
         } ?>><br>
@@ -136,7 +151,7 @@ if (isset($_POST['send'])) {
         <?php if ($missing && in_array('zcode', $missing)) { ?>
                   <span class="warning">Please enter your zipcode</span><br>
         <?php } ?>
-        <span class="inputspan">Zip: </span><input type="text" name="zcode" id="zcode"
+        <span class="inputspan">Zip: </span><input class="formInput" type="text" name="zcode" id="zcode"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($zcode) . '"';
         } ?>><br>
@@ -144,7 +159,7 @@ if (isset($_POST['send'])) {
         <?php if ($missing && in_array('bday', $missing)) { ?>
                   <span class="warning">Please enter your birthday</span><br>
         <?php } ?>
-        <span class="inputspan">Birthday: </span><input type="date" name="bday" id="bday"
+        <span class="inputspan">Birthday: </span><input class="formInput" type="date" name="bday" id="bday"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($bday) . '"';
         } ?>><br>
@@ -156,7 +171,7 @@ if (isset($_POST['send'])) {
         <?php }  elseif (isset($errors['duplicate'])) { ?>
                  <span class="warning">This email is already signed up for our newsletter.</span><br>
         <?php } ?>
-        <span class="inputspan">Email: </span><input type="text" name="email" id="email"
+        <span class="inputspan">Email: </span><input class="formInput" type="text" name="email" id="email"
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($email) . '"';
         } ?>><br>
@@ -164,7 +179,7 @@ if (isset($_POST['send'])) {
                 <span class="warning">Please select an email preference</span><br>
         <?php } ?>
         <span class="inputspan">Email Preference: </span><br>
-        <input type="radio" name="epref" value="HTML" id="epref-html"
+        <input class="formInput" type="radio" name="epref" value="HTML" id="epref-html"
         <?php
         if ($_POST && $_POST['epref'] == 'HTML') {
             echo 'checked';
@@ -180,7 +195,7 @@ if (isset($_POST['send'])) {
              <span class="warning">Please agree to the terms and conditions</span><br>
          <?php } ?>
         <input type="checkbox" name="agreetoterms" id="agreetoterms"> <span class="checkinputspan">I agree to the terms </span>
-        <input type="submit" name="send" value="Submit">
+        <input class="formsubmit" type="submit" name="send" value="Submit">
       </form>
     </main>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
