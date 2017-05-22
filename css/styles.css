@@ -134,7 +134,8 @@ body.infoPage{
 .albumTitle{
 	display:none;
 }
-main{
+main,
+div.thanks{
 	margin-top:4.3em;
 }
 h2,h3{
@@ -147,7 +148,8 @@ p{
 }
 
 /* ------------ â€˜FORM ------------*/
-form.inputForm{
+form.inputForm,
+div.thanks{
 	background:#332e2e;
 	border:2px dashed #cf3d3d;
 	margin-left:auto;
@@ -157,7 +159,8 @@ form.inputForm{
 	padding:16px;
 	width:50%;
 }
-	form h3{
+	form h3,
+	form h2{
 		border-bottom:2px dashed #cf3d3d;
 		font-size:2.5em;
 		padding-bottom:32px;
@@ -214,8 +217,7 @@ form.inputForm{
 		font-size: 1.1em;
 	}
 	/*--Login pages (added for redesign) --- */
-	h2.login,
-	h2.thankYou{
+	h2.login{
 		text-align: center;
 	}
 	.optional {
@@ -237,7 +239,7 @@ form.inputForm{
 		display:block;
 		float:none;
 		text-align:center;
-	}
+}
 	header ul{
 		text-align:center;
 	}

@@ -15,41 +15,51 @@ if (isset($_POST['insert'])) {
     $stmt = $conn->stmt_init();
     // move the file to the upload folder and rename it
     require_once '../Discography/File/Upload.php';
-    $imageOK = false;
+    $albumOK = false;
     $loader = new Upload($_SERVER['DOCUMENT_ROOT']."/discographyPHP/img/albumart/");
     $loader->setMaxSize($max);
     $loader->allowAllTypes();
     $loader->upload();
-    $names = $loader->getFilenames();
-    // $names will be an empty array if the upload failed
-    if ($names) {
+    $name = $loader->getFilenames();
+    // $name will be an empty array if the upload failed
+    if ($name) {
       $sql = 'INSERT INTO album (album_name, year_released, artist_id, image_filename) VALUES (?, ?, ?, ?)';
       if ($stmt->prepare($sql)) {
-          $stmt->bind_param('siis', $_POST['album'], $_POST['year'], $_POST['artistId'], $names[0]);
+          $stmt->bind_param('siis', $_POST['album'], $_POST['year'], $_POST['artistId'], $name[0]);
           $stmt->execute();
-          $imageOK = $stmt->affected_rows;
+          $albumOK = $stmt->affected_rows;
           }
-      }
-
-
-    // get the image's primary key or find out what went wrong
-    if ($imageOK) {
-        $album_id = $stmt->insert_id;
-    /*  if (isset($_POST['addTracks'])) {
-        $sql = "INSERT INTO tracks (album_id, track_order, track_name) VALUES ('$album_id', ?, ?)";
-        if ($stmt->prepare($sql)) {
-            $stmt->bind_param('is', $_POST['trackOrder'], $_POST['trackName']);
-            $stmt->execute();
         }
-      *///}
-    } else {
-        $imageError = implode(' ', $loader->getMessages());
-    }
-  } else {
-    $error = 'The year needs to be a four digit number';
-  }
-
-}
+        if ($albumOK > 0) {
+          // get the albums primary key
+          if (isset($_POST['trackName'])) {
+              $album_id = $stmt->insert_id;
+              $track_order = 1;
+              foreach ($_POST['trackName'] as $track_name) {
+                      $values[] = "($track_order, " . "$album_id," . "'$track_name'" . ")";
+                      $track_order++;
+              }
+              if ($values) {
+                  $sql = 'INSERT INTO tracks (track_order, album_id, track_name) VALUES ' . implode(',', $values);
+                  // execute the query and get error message if it fails
+                  if (!$conn->query($sql)) {
+                      //$error = $conn->error;
+                      $error = 'Unable to update the database at this time.';
+                   }
+                }
+              }
+             } else {
+               //$error = implode(' ', $loader->getMessages());
+               $error = 'Unable to update the database at this time.';
+             }
+         } else {
+           $error = 'The year needs to be a four digit number';
+         }
+        if ($albumOK && !isset($error)) {
+            header('Location: http://localhost/discographyPHP/index.php');
+            exit;
+        }
+      }
 // run this script only if the logout button has been clicked
 if (isset($_POST['logout'])) {
    // empty the $_SESSION array
@@ -62,7 +72,7 @@ if (isset($_POST['logout'])) {
    session_destroy();
 
    //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
-     header('Location: http://localhost/discographyPHP/user.php');
+   header('Location: http://localhost/discographyPHP/login.php');
    exit;
 }
 ?>
@@ -73,7 +83,6 @@ if (isset($_POST['logout'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Discography<?php if (isset($title)) {echo "&#8212;{$title}";} ?></title>
-
     <style>
     @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
     </style>
@@ -102,24 +111,21 @@ if (isset($_POST['logout'])) {
                 echo "<p class=\"warning\">$error</p>";
       } ?>
       <?php
-      if (isset($result)) {
+      if (isset($values)) {
           echo '<ul>';
-          foreach ($result as $message) {
+          foreach ($values as $message) {
             echo "<li class=\"warning\">$message</li>";
           }
         echo '</ul>';
       }
-      //echo "<p>$names[0]</p>";
-      //echo "<p>$imageOK</p>";
-      ?>
-      <p>
+       ?>
+       <p>
           <label for="artistId">Artist:</label>
           <select name="artistId" id="artistId">
               <option value="">Select</option>
               <?php
-              // get the list of images
-              $sql = 'SELECT artist_id, artist_name
-                              FROM artist ORDER BY artist_name';
+              // get the list of bands
+              $sql = 'SELECT artist_id, artist_name FROM artist ORDER BY artist_name';
               $bandName = $conn->query($sql);
               while ($row = $bandName->fetch_assoc()) {
                   ?>
@@ -152,7 +158,7 @@ if (isset($_POST['logout'])) {
             <label for="addTracks">Add track names</label>
         </p>
         <div class="optional">
-            <label for="track">Enter tracks in the order they appear:</label>
+            <label for="trackName">Enter tracks in the order they appear:</label>
             <p id="dynamicInput">Track 1<br><input type="text" class="trackInput" name="trackName[]">
             </p>
             <input type="button" class="trackSubmit" value="Add another track" onClick="addInput('dynamicInput');">

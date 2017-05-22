@@ -7,7 +7,7 @@
           <li><a href="http://localhost/discographyPHP/index.php">Discography</a></li>
           <li><a href="http://localhost/discographyPHP/info.php">Info</a></li>
           <li><a href="http://localhost/discographyPHP/cite.php">Cite</a></li>
-          <li><a href="http://localhost/discographyPHP/authenticated/manager.php">Dead Link</a></li>
+          <li><a href="http://localhost/discographyPHP/authenticated/user.php">User</a></li>
           <li><form method="post" action=""><input class="logout" name="logout" type="submit" value="Logout"></form></li>
         </ul>
       </nav>

@@ -6,8 +6,8 @@ if (isset($_POST['register'])) {
   $retyped = trim($_POST['conf_pwd']);
   //$userfile = '/Users/reidbrownell/private/encrypted.csv';
   require_once './includes/register_user_mysqli.php';
-  require_once '../includes/non_session.php';
-}
+  }
+require_once './includes/non_session.php';
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -16,7 +16,6 @@ if (isset($_POST['register'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Discography<?php if (isset($title)) {echo "&#8212;{$title}";} ?></title>
-
     <style>
     @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
     </style>
@@ -29,10 +28,8 @@ if (isset($_POST['register'])) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
-<header>
-  <div class="row">
+<div class="row">
   <?php
     if (file_exists($file) && is_readable($file)) {
         require $file;
@@ -40,14 +37,11 @@ if (isset($_POST['register'])) {
         throw new Exception("$file can't be found");
     }
   ?>
-</div><!--row 1--></header>
-    <h1>Japan Journey </h1>
-</header>
-<div id="wrapper">
-    <main>
+</div><!--row 1-->
+<main>
         <h2 class="login">Register for a user account</h2>
 
-        <form method="post" action="" >
+        <form class="inputForm" method="post" action="" >
           <?php
           if (isset($result) || isset($errors)) {
             echo '<ul class="warning">';
@@ -56,7 +50,7 @@ if (isset($_POST['register'])) {
                   echo "<li>$item</li>";
                 }
             } else {
-                echo "<li>$result</li>";
+                echo "<li>$success</li>";
             }
             echo '</ul>';
           }
@@ -81,20 +75,18 @@ if (isset($_POST['register'])) {
                 <label for="no">no</label>
             </p>
             <p class="optional">
-                <label for="email">Enter the email you signed up with:</label>
-                <input type="email" name="email" id="email">
+                <label for="email">Thank you for signing up.</label>
+
             </p>
             <p class="optional">
                 <span id="getMoreInfo"><a href="info.php">Get our newsletter!</a></span>
 
             </p>
             <p>
-                <input type="submit" name="register" value="Register">
+                <input type="submit" name="register" value="Register" class="formSubmit">
             </p>
         </form>
     </main>
-
-</div>
 <script src="js/toggle_fields.js"></script>
 </body>
 </html>

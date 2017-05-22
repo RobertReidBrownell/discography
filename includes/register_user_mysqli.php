@@ -10,7 +10,7 @@ if (strlen($username) < $usernameMinChars) {
 if (preg_match('/\s/', $username)) {
   $errors[] = 'Username should not contain spaces.';
 }
-$checkPwd = new CheckPassword($password, 10);
+$checkPwd = new CheckPassword($password, 8);
 $checkPwd->requireMixedCase(false);
 $checkPwd->requireNumbers(0);
 $checkPwd->requireSymbols(0);
@@ -41,6 +41,7 @@ if (!$errors) {
       $errors[] = "$username is already in use. Please choose another username.";
   } else {
       // before deploying this REPLACE the following line to a generic message.
-      $errors[] = $stmt->error;
+      //$errors[] = $stmt->error;
+      $errors[] = 'You cannot be registered at this time';
   }
 }

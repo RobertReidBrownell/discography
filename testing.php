@@ -1,7 +1,7 @@
 <?php
 include './includes/title.php';
 require_once './includes/connection.php';
-$bday = '12-12-2007';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +24,6 @@ $bday = '12-12-2007';
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body class="infoPage">
-  <?php   $date = $bday;
-   $dateTime = new DateTime($date);
-   $formatted_date=date_format ( $dateTime, 'Y-m-d' );
-   echo $formatted_date;  ?>
- <!-- // This will output 2007-12-12 -->
+  
   </body>
 </html>

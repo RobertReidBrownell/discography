@@ -76,7 +76,7 @@ if (isset($_POST['logout'])) {
       </p>
       <p>
           <input class="formSubmit" name="login" type="submit" id="login" value="Log in">
-          <a href="newuser.php" class="registration">Register new account</a>
+          <a href="register.php" class="registration">Register new account</a>
       </p>
   </form>
 </div><!-- row 2-->

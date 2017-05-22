@@ -1,12 +1,6 @@
 <?php
 include './includes/title.php';
-if (isset($_POST['register'])) {
-  $username = trim($_POST['username']);
-  $password = trim($_POST['pwd']);
-  $retyped = trim($_POST['conf_pwd']);
-  //$userfile = '/Users/reidbrownell/private/encrypted.csv';
-  require_once '../includes/register_user_mysqli.php';
-}
+require_once './includes/non_session.php';
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -15,7 +9,6 @@ if (isset($_POST['register'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Discography<?php if (isset($title)) {echo "&#8212;{$title}";} ?></title>
-
     <style>
     @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
     </style>
@@ -31,7 +24,6 @@ if (isset($_POST['register'])) {
 <body class="infoPage">
   <div class="row">
   <?php
-    $file =  './includes/headernav.php';
     if (file_exists($file) && is_readable($file)) {
         require $file;
     } else {
@@ -39,13 +31,10 @@ if (isset($_POST['register'])) {
     }
   ?>
 </div><!--row 1-->
-<div id="wrapper">
-    <main>
-      <h2 class="thankYou">Thank You</h2>
-      <form class="inputForm">
+    <div class="thanks">
+        <h2>Thank You</h2>
         <p>You have signed up for our newsletter. We appreciate your support, and wouldn't be where we are today without fans like you.</p>
         <p>We hope you'll continue to enjoy our website and hope to see you again.</p>
-        </form>
-</div>
+      </div>
 </body>
 </html>

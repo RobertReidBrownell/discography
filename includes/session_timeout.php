@@ -26,4 +26,5 @@ if (!isset($_SESSION['authenticated']))  {
 } else {
     // if it's got this far, it's OK, so update start time
     $_SESSION['start'] = time();
+    $file = $_SERVER['DOCUMENT_ROOT']."/discographyPHP/includes/headernavuser.php";
 }

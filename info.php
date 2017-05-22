@@ -59,7 +59,6 @@ if (isset($_POST['logout'])) {
     }
     // end session and redirect
     session_destroy();
-
     //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
       header('Location: http://localhost/discographyPHP/login.php');
     exit;
@@ -72,7 +71,6 @@ if (isset($_POST['logout'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Discography<?php if (isset($title)) {echo "&#8212;{$title}";} ?></title>
-
     <style>
     @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
     </style>
@@ -115,7 +113,6 @@ if (isset($_POST['logout'])) {
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($fname) . '"';
         } ?>><br>
-
         <?php if ($missing && in_array('lname', $missing)) { ?>
                   <span class="warning">Please enter your last name</span><br>
         <?php } ?>
@@ -123,7 +120,6 @@ if (isset($_POST['logout'])) {
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($lname) . '"';
         } ?>><br>
-
         <?php if ($missing && in_array('address', $missing)) { ?>
                   <span class="warning">Please enter your address</span><br>
         <?php } ?>
@@ -131,7 +127,6 @@ if (isset($_POST['logout'])) {
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($address) . '"';
         } ?>><br>
-
         <?php if ($missing && in_array('city', $missing)) { ?>
                   <span class="warning">Please enter your city</span><br>
         <?php } ?>
@@ -139,7 +134,6 @@ if (isset($_POST['logout'])) {
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($city) . '"';
         } ?>><br>
-
         <?php if ($missing && in_array('state', $missing)) { ?>
                   <span class="warning">Please enter your state</span><br>
         <?php } ?>
@@ -147,7 +141,6 @@ if (isset($_POST['logout'])) {
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($state) . '"';
         } ?>><br>
-
         <?php if ($missing && in_array('zcode', $missing)) { ?>
                   <span class="warning">Please enter your zipcode</span><br>
         <?php } ?>
@@ -155,7 +148,6 @@ if (isset($_POST['logout'])) {
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($zcode) . '"';
         } ?>><br>
-
         <?php if ($missing && in_array('bday', $missing)) { ?>
                   <span class="warning">Please enter your birthday</span><br>
         <?php } ?>
@@ -163,7 +155,6 @@ if (isset($_POST['logout'])) {
         <?php if ($missing || $errors) {
             echo 'value="' . htmlentities($bday) . '"';
         } ?>><br>
-
         <?php if ($missing && in_array('email', $missing)) { ?>
                 <span class="warning">Please enter your email address</span><br>
         <?php } elseif (isset($errors['email'])) { ?>
@@ -195,14 +186,8 @@ if (isset($_POST['logout'])) {
              <span class="warning">Please agree to the terms and conditions</span><br>
          <?php } ?>
         <input type="checkbox" name="agreetoterms" id="agreetoterms"> <span class="checkinputspan">I agree to the terms </span>
-        <input class="formsubmit" type="submit" name="send" value="Submit">
+        <input class="formSubmit" type="submit" name="send" value="Submit">
       </form>
     </main>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <!--  <script src="js/bootstrap.min.js"></script>
-
-    <script src="js/app.js"></script> -->
   </body>
 </html>
