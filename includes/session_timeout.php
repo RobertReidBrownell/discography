@@ -6,8 +6,7 @@ $timelimit = 15 * 60; // 15 minutes
 // get the current time
 $now = time();
 // where to redirect if rejected
-$redirect = 'http://localhost/discographyPHP/login.php';
-
+$redirect = 'https://www.rrbconcepts.com/discographyPHP/login.php';
 // if session variable not set, redirect to login page
 if (!isset($_SESSION['authenticated']))  {
     header("Location: $redirect");
@@ -26,5 +25,6 @@ if (!isset($_SESSION['authenticated']))  {
 } else {
     // if it's got this far, it's OK, so update start time
     $_SESSION['start'] = time();
-    $file = $_SERVER['DOCUMENT_ROOT']."/discographyPHP/includes/headernavuser.php";
+    // set variable for nav menu
+    $file = "/home/shanabro/private/includes/headernavuser.php";
 }

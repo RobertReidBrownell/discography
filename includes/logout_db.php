@@ -10,11 +10,6 @@ if (isset($_POST['logout'])) {
     // end session and redirect
     session_destroy();
 
-    //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
-      header('Location: http://localhost/discographyPHP/login.php');
+    header('Location: https://www.rrbconcepts.com/discographyPHP/login.php');
     exit;
 }
-?>
-<form method="post" action="">
-    <input name="logout" type="submit" value="Log out">
-</form>

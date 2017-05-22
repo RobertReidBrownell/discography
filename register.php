@@ -1,13 +1,13 @@
 <?php
-include './includes/title.php';
+include 'title.php';
 if (isset($_POST['register'])) {
   $username = trim($_POST['username']);
   $password = trim($_POST['pwd']);
   $retyped = trim($_POST['conf_pwd']);
-  //$userfile = '/Users/reidbrownell/private/encrypted.csv';
-  require_once './includes/register_user_mysqli.php';
+  require_once 'register_user_mysqli.php';
   }
-require_once './includes/non_session.php';
+require_once 'non_session.php';
+require_once 'logout.php';
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -40,8 +40,7 @@ require_once './includes/non_session.php';
 </div><!--row 1-->
 <main>
         <h2 class="login">Register for a user account</h2>
-
-        <form class="inputForm" method="post" action="" >
+        <form class="inputForm" method="post" action="register.php" >
           <?php
           if (isset($result) || isset($errors)) {
             echo '<ul class="warning">';
@@ -75,12 +74,10 @@ require_once './includes/non_session.php';
                 <label for="no">no</label>
             </p>
             <p class="optional">
-                <label for="email">Thank you for signing up.</label>
-
+                <span id="email">Thank you for signing up.</span>
             </p>
             <p class="optional">
                 <span id="getMoreInfo"><a href="info.php">Get our newsletter!</a></span>
-
             </p>
             <p>
                 <input type="submit" name="register" value="Register" class="formSubmit">

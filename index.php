@@ -1,7 +1,7 @@
 <?php
-include './includes/title.php';
-require_once './includes/connection.php';
-require_once './includes/non_session.php';
+include 'title.php';
+require_once 'connection.php';
+require_once 'non_session.php';
 
 // create the database connection
 $conn = dbConnect('read');
@@ -37,20 +37,7 @@ if (!$trackList) {
     $row = $trackList->fetch_assoc();
 }
 // run this script only if the logout button has been clicked
-if (isset($_POST['logout'])) {
-    // empty the $_SESSION array
-    $_SESSION = [];
-    // invalidate the session cookie
-    if (isset($_COOKIE[session_name()])) {
-        setcookie(session_name(), '', time()-86400, '/');
-    }
-    // end session and redirect
-    session_destroy();
-
-    //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
-      header('Location: http://localhost/discographyPHP/login.php');
-    exit;
-}
+require_once 'logout.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +68,7 @@ if (isset($_POST['logout'])) {
         }
       ?>
 	</div><!--row 1-->
-	<main role="main">
+	<main>
 	  <div class="row">
 		  <div class="col-sm-4">
 				<nav class="albumList">
@@ -107,11 +94,6 @@ if (isset($_POST['logout'])) {
       </figure>
   	    </div><!--column 2-->
 	</div><!--row 2-->
-</main>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed-->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/app.js"></script>
+</main>  
   </body>
 </html>

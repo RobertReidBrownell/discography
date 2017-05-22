@@ -1,7 +1,7 @@
 <?php
-include './includes/title.php';
-require_once './includes/connection.php';
-require_once './includes/non_session.php';
+include 'title.php';
+require_once 'connection.php';
+require_once 'non_session.php';
 // initating $errors and $missing as arrays so they can store multiple values
 $errors = [];
 $missing = [];
@@ -21,7 +21,7 @@ if (isset($_POST['send'])) {
         $_POST['agreetoterms'] = '';
         $errors['agreetoterms'] = true;
     }
-    require './includes/forminsert.php';
+    require 'forminsert.php';
     if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['email']) && !empty($_POST['address']) && !empty($_POST['city']) &&
         !empty($_POST['state']) && !empty($_POST['zcode']) && !empty($_POST['bday']) && !empty($_POST['agreetoterms']) && !empty($_POST['epref'])) {
         // initialize prepared statement
@@ -39,8 +39,7 @@ if (isset($_POST['send'])) {
         }
         //redirect if successful or display error
         if ($OK) {
-          //  header('Location: http://www.rrbconcepts.com/discographyPHP/thank_you.php');
-              header('Location: http://localhost/discographyPHP/thank_you.php');
+             header('Location: https://www.rrbconcepts.com/discographyPHP/thank_you.php');
             exit;
         } else {
               $error = $stmt->error;
@@ -50,19 +49,7 @@ if (isset($_POST['send'])) {
   }
 }
 // run this script only if the logout button has been clicked
-if (isset($_POST['logout'])) {
-    // empty the $_SESSION array
-    $_SESSION = [];
-    // invalidate the session cookie
-    if (isset($_COOKIE[session_name()])) {
-        setcookie(session_name(), '', time()-86400, '/');
-    }
-    // end session and redirect
-    session_destroy();
-    //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
-      header('Location: http://localhost/discographyPHP/login.php');
-    exit;
-}
+require_once 'logout.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,19 +80,20 @@ if (isset($_POST['logout'])) {
       	}
       ?>
     </div><!--row 1-->
-    <main role="main">
+    <main>
       <img src="img/infopage/info.jpg" alt="An image of the band Jukebox the ghost wakling across the street" class="infoImg">
       <h2>Jukebox The Ghost</h2>
       <p>
         Jukebox the Ghost is a band that began in 2003, consisting of Ben Thornewill, Tommy Siegel, and Jesse Kristen. They love touring and have tons of shows, and they feature a piano rock style with a fair bit of experimentation.
       </p>
-      <form class="inputForm" action="" method="post" >
+      <form class="inputForm" action="info.php" method="post" >
         <?php  if ($missing || $errors) { ?>
             <p class="warning">Please fix the item(s) indicated.</p>
         <?php } elseif (($_POST && $suspect) || ($_POST && isset($errors['mailfail']))) { ?>
             <p class="warning">We are sorry. Your response email has failed.</p>
         <?php } ?>
 		<h3>Sign up for updates</h3>
+    <p><b>All fields are required</b></p>
         <?php if ($missing && in_array('fname', $missing)) { ?>
                   <span class="warning">Please enter your first name</span><br>
         <?php } ?>
@@ -186,7 +174,7 @@ if (isset($_POST['logout'])) {
              <span class="warning">Please agree to the terms and conditions</span><br>
          <?php } ?>
         <input type="checkbox" name="agreetoterms" id="agreetoterms"> <span class="checkinputspan">I agree to the terms </span>
-        <input class="formSubmit" type="submit" name="send" value="Submit">
+        <input class="formSubmit" type="submit" name="send" value="Get Updates!">
       </form>
     </main>
   </body>

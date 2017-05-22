@@ -1,29 +1,16 @@
 <?php
-include './includes/title.php';
-require_once './includes/connection.php';
+include 'title.php';
+require_once 'connection.php';
 $error = '';
-require_once './includes/non_session.php';
+require_once 'non_session.php';
 if (isset($_POST['login'])) {
     session_start();
     $username = trim($_POST['username']);
     $password = trim($_POST['pwd']);
-    // $redirect = 'http://localhost/phpsols/authenticate/menu_db.php';
-    require_once './includes/authenticate_mysqli.php';
+    require_once 'authenticate_mysqli.php';
 }
 // run this script only if the logout button has been clicked
-if (isset($_POST['logout'])) {
-    // empty the $_SESSION array
-    $_SESSION = [];
-    // invalidate the session cookie
-    if (isset($_COOKIE[session_name()])) {
-        setcookie(session_name(), '', time()-86400, '/');
-    }
-    // end session and redirect
-    session_destroy();
-     //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
-      header('Location: http://localhost/discographyPHP/login.php');
-    exit;
-}
+require_once 'logout.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +19,6 @@ if (isset($_POST['logout'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Discography<?php if (isset($title)) {echo "&#8212;{$title}";} ?></title>
-
     <style>
     @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
     </style>
@@ -55,11 +41,10 @@ if (isset($_POST['logout'])) {
         }
       ?>
 	</div><!--row 1-->
-  <main role="main">
+  <main>
   <div class="row">
     <h2 class="login">Login</h2>
-
-  <form class="inputForm" method="post" action="">
+  <form class="inputForm" method="post" action="login.php">
     <?php if ($error) {
         echo "<p class=\"warning\">$error</p>";
     } elseif (isset($_GET['expired'])) {

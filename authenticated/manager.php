@@ -1,7 +1,7 @@
 <?php
-include '../includes/title.php';
-require_once '../includes/connection.php';
-require_once '../includes/a_session_timeout.php';
+include 'title.php';
+require_once 'connection.php';
+require_once 'a_session_timeout.php';
 
 use Discography\File\Upload;
 // set the maximum upload size in bytes
@@ -16,7 +16,7 @@ if (isset($_POST['insert'])) {
     // move the file to the upload folder and rename it
     require_once '../Discography/File/Upload.php';
     $albumOK = false;
-    $loader = new Upload($_SERVER['DOCUMENT_ROOT']."/discographyPHP/img/albumart/");
+    $loader = new Upload("../img/albumart/");
     $loader->setMaxSize($max);
     $loader->allowAllTypes();
     $loader->upload();
@@ -56,25 +56,11 @@ if (isset($_POST['insert'])) {
            $error = 'The year needs to be a four digit number';
          }
         if ($albumOK && !isset($error)) {
-            header('Location: http://localhost/discographyPHP/index.php');
+            header('Location: http://www.rrbconcepts.com/discographyPHP/index.php');
             exit;
         }
       }
-// run this script only if the logout button has been clicked
-if (isset($_POST['logout'])) {
-   // empty the $_SESSION array
-   $_SESSION = [];
-   // invalidate the session cookie
-   if (isset($_COOKIE[session_name()])) {
-       setcookie(session_name(), '', time()-86400, '/');
-   }
-   // end session and redirect
-   session_destroy();
-
-   //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
-   header('Location: http://localhost/discographyPHP/login.php');
-   exit;
-}
+require_once 'logout.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,7 +92,7 @@ if (isset($_POST['logout'])) {
       ?>
 	</div><!--row 1-->
   <main>
-    <form class="inputForm" method="post" action="" enctype="multipart/form-data">
+    <form class="inputForm" method="post" action="manager.php" enctype="multipart/form-data">
       <?php if (isset($error)) {
                 echo "<p class=\"warning\">$error</p>";
       } ?>
@@ -167,7 +153,7 @@ if (isset($_POST['logout'])) {
             <input class="formSubmit" type="submit" name="insert" value="Add album" id="insert">
         </p>
       </form>
-    </main>
-    <script src="../js/tracks.js"></script>
-    </body>
-    </html>
+  </main>
+  <script src="../js/tracks.js"></script>
+  </body>
+  </html>

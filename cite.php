@@ -1,7 +1,8 @@
 <?php
-include './includes/title.php';
-require_once './includes/connection.php';
-require_once './includes/non_session.php';
+include 'title.php';
+require_once 'connection.php';
+require_once 'non_session.php';
+require_once 'logout.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,6 @@ require_once './includes/non_session.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Discography<?php if (isset($title)) {echo "&#8212;{$title}";} ?></title>
-
     <style>
     @import url('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Overpass:200');
     </style>
@@ -33,8 +33,7 @@ require_once './includes/non_session.php';
         }
       ?>
     </div><!--row 1-->
-
-    <main role="main">
+    <main>
       <h2>Cite</h2>
 	  <ul class="citelinks">
 	  	<li><a href=" http://owtk.com/2014/10/5-reasons-you-should-listen-new-jukebox-the-ghost-album-with-kids/
@@ -43,14 +42,6 @@ require_once './includes/non_session.php';
 ">Jukebox The Ghost (logo)</a></li>
 		<li><a href="https://www.amazon.com/">Amazon (Album art images)</a></li>
 	  </ul>
-
     </main>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <script src="js/app.js"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
-include './includes/title.php';
-require_once './includes/non_session.php';
+include 'title.php';
+require_once 'non_session.php';
+require_once 'logout.php';
 ?>
 <!DOCTYPE HTML>
 <html>

@@ -1,21 +1,9 @@
 <?php
-include '../includes/title.php';
-require_once '../includes/connection.php';
-require_once '../includes/session_timeout.php';
+include 'title.php';
+require_once 'connection.php';
+require_once 'session_timeout.php';
 // run this script only if the logout button has been clicked
-if (isset($_POST['logout'])) {
-   // empty the $_SESSION array
-   $_SESSION = [];
-   // invalidate the session cookie
-   if (isset($_COOKIE[session_name()])) {
-       setcookie(session_name(), '', time()-86400, '/');
-   }
-   // end session and redirect
-   session_destroy();
-   //header('Location: http://www.rrbconcepts.com/phpsols/ch17/authenticate/login_db.php');
-   header('Location: http://localhost/discographyPHP/login.php');
-   exit;
-}
+require_once 'logout.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
