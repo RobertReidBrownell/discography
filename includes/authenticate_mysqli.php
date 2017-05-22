@@ -4,8 +4,6 @@ $conn = dbConnect('read');
 $errors = [];
 // location to redirect on success for admin
 $redirect = 'https://www.rrbconcepts.com/discographyPHP/index.php';
-// location to redirect on success for users
-$redirected = 'https://www.rrbconcepts.com/discographyPHP/index.php';
 // get the username's encrypted password from the database
 $sql = 'SELECT pwd, user_level FROM users WHERE username = ?';
 // initialize and prepare statement
@@ -31,7 +29,7 @@ if (password_verify($password, $storedPwd)) {
      // get the time the session started
      $_SESSION['start'] = time();
      session_regenerate_id();
-     header("Location: $redirected");
+     header("Location: $redirect");
      exit;
    }
 } else {

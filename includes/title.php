@@ -4,5 +4,4 @@ $title = str_replace('_', ' ',$title);
 if (strtolower($title) == 'index') {
   $title = 'home';
 }
-
 $title = ucwords($title);
